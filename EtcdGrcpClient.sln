@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.15
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EtcdGrpcClient", "EtcdGrpcClient\EtcdGrpcClient.csproj", "{379310B6-C0F8-47F0-A599-4E28B7A7BD36}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EtcdGrpcClient.Test", "EtcdGrpcClient.Test\EtcdGrpcClient.Test.csproj", "{4069C89F-1459-4677-AC33-C37FD7EC7812}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{379310B6-C0F8-47F0-A599-4E28B7A7BD36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{379310B6-C0F8-47F0-A599-4E28B7A7BD36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{379310B6-C0F8-47F0-A599-4E28B7A7BD36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{379310B6-C0F8-47F0-A599-4E28B7A7BD36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4069C89F-1459-4677-AC33-C37FD7EC7812}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4069C89F-1459-4677-AC33-C37FD7EC7812}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4069C89F-1459-4677-AC33-C37FD7EC7812}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4069C89F-1459-4677-AC33-C37FD7EC7812}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A53EE5CD-A4DD-4AF2-A8F0-1101194CF5DC}
+	EndGlobalSection
+EndGlobal
