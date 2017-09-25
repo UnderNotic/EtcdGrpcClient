@@ -8,6 +8,7 @@ namespace EtcdGrpcClient.Test
         [Test]
         public void Test1()
         {
+            System.Console.WriteLine("hello");
             Assert.IsTrue(true);
         }
        
