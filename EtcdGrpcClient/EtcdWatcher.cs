@@ -23,22 +23,22 @@ namespace EtcdGrcpClient
 
     public class EtcdWatcher : IDisposable
     {
-        public string WatchedKey { get; }
-
         private AsyncDuplexStreamingCall<WatchRequest, WatchResponse> duplexCall;
         private List<Action<EtcdWatchEvent[]>> actions = new List<Action<EtcdWatchEvent[]>>();
+        private bool isDisposed = false;
 
-        public EtcdWatcher(string watchedKey, AsyncDuplexStreamingCall<WatchRequest, WatchResponse> duplexCall)
+        public EtcdWatcher(AsyncDuplexStreamingCall<WatchRequest, WatchResponse> duplexCall)
         {
-            WatchedKey = watchedKey;
             this.duplexCall = duplexCall;
             Watch(duplexCall.ResponseStream);
         }
 
-        public async void Watch(IAsyncStreamReader<WatchResponse> responseStream)
+        private async void Watch(IAsyncStreamReader<WatchResponse> responseStream)
         {
-            while (await responseStream.MoveNext())
+            while (!isDisposed)
             {
+                await responseStream.MoveNext();
+
                 var watchEvents = responseStream.Current.Events.Select(ev =>
                     {
                         var key = ev.Kv.Key.ToStringUtf8();
@@ -47,7 +47,10 @@ namespace EtcdGrcpClient
                         return new EtcdWatchEvent(key, value, type);
                     }
                 ).ToArray();
-                actions.ForEach(a => a(watchEvents));
+                if (watchEvents.Length != 0)
+                {
+                    actions.ForEach(a => a(watchEvents));
+                }
             }
         }
 
@@ -58,6 +61,8 @@ namespace EtcdGrcpClient
 
         public void Dispose()
         {
+            isDisposed = true;
+            this.duplexCall.RequestStream.CompleteAsync();
             this.duplexCall.Dispose();
         }
     }

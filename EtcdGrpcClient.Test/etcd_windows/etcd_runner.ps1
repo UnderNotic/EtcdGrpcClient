@@ -1,0 +1,1 @@
+.\etcd --name infra0 --initial-advertise-peer-urls http://localhost:2380 --listen-peer-urls http://localhost:2380 --listen-client-urls http://localhost:2381 --advertise-client-urls http://localhost:2381
