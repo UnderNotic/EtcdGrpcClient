@@ -34,26 +34,30 @@ namespace EtcdGrpcClient.Test.integration
         }
 
         [Test]
-        public async Task ShouldWatchMultipleItemsPrefix()
+        public async Task ShouldWatchSinglMultipleItemsPrefix()
         {
             var resultList = new List<EtcdWatchEvent[]>();
             var watcher = await etcdClient.WatchRange("test");
             watcher.Subscribe(e => resultList.Add(e));
 
             await Task.WhenAll(Enumerable.Range(0, 10).Select(async x => await etcdClient.Put("test" + x, "value" + x)));
+            await Task.Delay(500);
+            Assert.AreEqual(10, resultList.Count);
+
             await Task.WhenAll(Enumerable.Range(0, 5).Select(async x => await etcdClient.Put("test" + x, "value" + x)));
+            await Task.Delay(500);
+            Assert.AreEqual(15, resultList.Count);
+
             await Task.WhenAll(Enumerable.Range(5, 5).Select(async x => await etcdClient.Put("test" + x, "value" + x)));
+            await Task.Delay(500);
+            Assert.AreEqual(20, resultList.Count);
+
             await Task.WhenAll(Enumerable.Range(1, 2).Select(async x => await etcdClient.Put("test" + x, "value" + x)));
             await etcdClient.Put("t", "t");
-
-            await Task.Delay(1500);
+            await Task.Delay(500);
             watcher.Dispose();
+            Assert.AreEqual(22, resultList.Count);
 
-            Assert.AreEqual(4, resultList.Count);
-            Assert.AreEqual(10, resultList[0].Length);
-            Assert.AreEqual(5, resultList[1].Length);
-            Assert.AreEqual(5, resultList[2].Length);
-            Assert.AreEqual(2, resultList[3].Length);
         }
 
         [Test]
@@ -61,20 +65,26 @@ namespace EtcdGrpcClient.Test.integration
         {
             var resultList = new List<EtcdWatchEvent[]>();
             var watcher = await etcdClient.WatchRange("test0", "test2");
-            watcher.Subscribe(e => resultList.Add(e));
+            watcher.Subscribe(e => { Console.WriteLine(e[0].Value); resultList.Add(e); });
 
             await Task.WhenAll(Enumerable.Range(0, 10).Select(async x => await etcdClient.Put("test" + x, "value" + x)));
+            await Task.Delay(1000);
+            Assert.AreEqual(2, resultList.Count);
+
             await Task.WhenAll(Enumerable.Range(0, 5).Select(async x => await etcdClient.Put("test" + x, "value" + x)));
+            await Task.Delay(1000);
+            Assert.AreEqual(4, resultList.Count);
+
             await Task.WhenAll(Enumerable.Range(5, 5).Select(async x => await etcdClient.Put("test" + x, "value" + x)));
+            await Task.Delay(1000);
+            Assert.AreEqual(4, resultList.Count);
+
             await Task.WhenAll(Enumerable.Range(1, 2).Select(async x => await etcdClient.Put("test" + x, "value" + x)));
             await etcdClient.Put("t", "t");
+            await Task.Delay(1000);
 
-            await Task.Delay(500);
             watcher.Dispose();
-            Assert.AreEqual(3, resultList.Count);
-            Assert.AreEqual(3, resultList[0].Length);
-            Assert.AreEqual(3, resultList[1].Length);
-            Assert.AreEqual(2, resultList[2].Length);
+            Assert.AreEqual(5, resultList.Count);
         }
 
         [Test]
