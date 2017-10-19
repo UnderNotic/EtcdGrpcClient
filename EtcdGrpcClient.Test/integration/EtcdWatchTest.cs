@@ -68,20 +68,20 @@ namespace EtcdGrpcClient.Test.integration
             watcher.Subscribe(e => { Console.WriteLine(e[0].Value); resultList.Add(e); });
 
             await Task.WhenAll(Enumerable.Range(0, 10).Select(async x => await etcdClient.Put("test" + x, "value" + x)));
-            await Task.Delay(1000);
+            await Task.Delay(500);
             Assert.AreEqual(2, resultList.Count);
 
             await Task.WhenAll(Enumerable.Range(0, 5).Select(async x => await etcdClient.Put("test" + x, "value" + x)));
-            await Task.Delay(1000);
+            await Task.Delay(500);
             Assert.AreEqual(4, resultList.Count);
 
             await Task.WhenAll(Enumerable.Range(5, 5).Select(async x => await etcdClient.Put("test" + x, "value" + x)));
-            await Task.Delay(1000);
+            await Task.Delay(500);
             Assert.AreEqual(4, resultList.Count);
 
             await Task.WhenAll(Enumerable.Range(1, 2).Select(async x => await etcdClient.Put("test" + x, "value" + x)));
             await etcdClient.Put("t", "t");
-            await Task.Delay(1000);
+            await Task.Delay(500);
 
             watcher.Dispose();
             Assert.AreEqual(5, resultList.Count);
@@ -90,7 +90,13 @@ namespace EtcdGrpcClient.Test.integration
         [Test]
         public async Task ShouldNotReadAfterDispose()
         {
+            var resultList = new List<EtcdWatchEvent[]>();
+            var watcher = await etcdClient.WatchRange("test");
+            watcher.Subscribe(e => { Console.WriteLine(e[0].Value); resultList.Add(e); });
+            watcher.Dispose();
+            await etcdClient.Put("test", "value");
 
+            Assert.AreEqual(0, resultList.Count);
         }
 
         [SetUp]
