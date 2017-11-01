@@ -1,8 +1,3 @@
-$env:BUILD = $env:APPVEYOR_BUILD_NUMBER.PadLeft(6, "0")
-
-# version format
-version: 0.0.%BUILD%
-
 # branches to build
 branches:
   # whitelist
@@ -21,23 +16,12 @@ cache:
   - '%USERPROFILE%\.nuget\packages'
 
 
-dotnet_csproj:
-  patch: true
-  file: '**\*.csproj;**\*.props;**\*.fsproj;**\*.xml'
-  version: '{version}'
-  package_version: '{version}'
-  assembly_version: '{version}'
-  file_version: '{version}'
-  informational_version: '{version}'
-
-
 # Automatically register private account and/or project AppVeyor NuGet feeds.
 nuget:
   account_feed: true
   project_feed: true
   disable_publish_on_pr: true     # disable publishing of .nupkg artifacts to
                                   # account/project feeds for pull request builds
-
 
 #---------------------------------#
 #       build configuration       #
@@ -52,14 +36,13 @@ init:
 
 before_build:
   - cmd: dotnet --version
-  - cmd: echo Nuget version %BUILD%
   - dotnet restore --verbosity minimal
 
 build_script:
-  - dotnet build -c %CONFIGURATION% --no-restore
+  - dotnet build -c %CONFIGURATION% --no-restore --version-suffix %LABEL%
 
 after_build:
-  - dotnet pack "EtcdGrpcClient" --no-build
+  - dotnet pack "EtcdGrpcClient" --no-build --version-suffix %LABEL%
 
 before_test:
   - echo "Running Tests"
