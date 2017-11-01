@@ -111,7 +111,7 @@ artifacts:
   # pushing all *.nupkg files in build directory recursively
   - path: '**\*.nupkg'
 
- deploy:
+deploy:
     # Deploying to NuGet feed
   - provider: NuGet
     server: https://my.nuget.server/feed
