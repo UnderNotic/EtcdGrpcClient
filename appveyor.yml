@@ -50,7 +50,7 @@ init:
 
 before_build:
   - cmd: dotnet --version
-  - cmd: echo Nuget version: %LABEL% 
+  - cmd: echo Nuget version %LABEL% 
   - dotnet restore --verbosity minimal
 
 build_script:
