@@ -1,7 +1,5 @@
 # version format
 version: 0.0.{build}
-environment:
-  version: "{version}"
 
 # branches to build
 branches:
@@ -46,12 +44,15 @@ nuget:
 configuration: 
   - Release
 
+init:
+- ps: $Env:LABEL = $Env:APPVEYOR_BUILD_NUMBER.PadLeft(5, "0")
+
 before_build:
   - cmd: dotnet --version
   - dotnet restore --verbosity minimal
 
 build_script:
-  - dotnet build -c %CONFIGURATION% --no-restore --version-suffix %version%
+  - dotnet build -c %CONFIGURATION% --no-restore --version-suffix %LABEL%
 
 after_build:
   - dotnet pack "EtcdGrpcClient" --no-build --version-suffix %LABEL% -o artifacts
