@@ -32,7 +32,7 @@ configuration:
   - Release
 
 init:
-- ps: $Env:LABEL = $Env:APPVEYOR_BUILD_NUMBER.PadLeft(6, "0")
+- ps: $Env:LABEL = "CI" + $Env:APPVEYOR_BUILD_NUMBER.PadLeft(6, "0")
 
 before_build:
   - cmd: dotnet --version
