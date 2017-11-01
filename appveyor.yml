@@ -48,7 +48,7 @@ before_build:
   - dotnet restore --verbosity minimal
 
 build_script:
-  - dotnet build -c $(configuration) --no-restore --version-suffix $(version)
+  - dotnet build -c {{configuration}} --no-restore --version-suffix "{version}"
 
 after_build:
   - dotnet pack "EtcdGrpcClient" --no-build --version-suffix %LABEL% -o artifacts
