@@ -34,7 +34,7 @@ namespace EtcdGrpcClient.Test.integration
         }
 
         [Test]
-        public async Task ShouldWatchSinglMultipleItemsPrefix()
+        public async Task ShouldWatchSingleMultipleItemsPrefix()
         {
             var resultList = new List<EtcdWatchEvent[]>();
             var watcher = await etcdClient.WatchRange("test");
@@ -57,7 +57,6 @@ namespace EtcdGrpcClient.Test.integration
             await Task.Delay(500);
             watcher.Dispose();
             Assert.AreEqual(22, resultList.Count);
-
         }
 
         [Test]

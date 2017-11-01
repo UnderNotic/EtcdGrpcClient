@@ -35,9 +35,17 @@ namespace EtcdGrcpClient
 
         private async void Watch(IAsyncStreamReader<WatchResponse> responseStream)
         {
-            while (!isDisposed)
+            do
             {
-                await responseStream.MoveNext();
+                try
+                {
+                    await responseStream.MoveNext();
+                }
+                catch (Exception)
+                {
+                    Dispose();
+                    break;
+                }
 
                 var watchEvents = responseStream.Current.Events.Select(ev =>
                     {
@@ -51,7 +59,7 @@ namespace EtcdGrcpClient
                 {
                     actions.ForEach(a => a(watchEvents));
                 }
-            }
+            } while (!isDisposed && !responseStream.Current.Canceled);
         }
 
         public void Subscribe(Action<EtcdWatchEvent[]> action)
@@ -62,7 +70,6 @@ namespace EtcdGrcpClient
         public void Dispose()
         {
             isDisposed = true;
-            this.duplexCall.RequestStream.CompleteAsync();
             this.duplexCall.Dispose();
         }
     }
