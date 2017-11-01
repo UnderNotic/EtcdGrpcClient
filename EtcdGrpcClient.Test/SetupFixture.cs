@@ -11,7 +11,7 @@ namespace EtcdGrpcClient.Test
         Process process;
 
         [OneTimeSetUp]
-        public async Task RunEtcd()
+        public void RunEtcd()
         {
             FindAndKillEtcdProcesses();
             process = new Process();
