@@ -32,8 +32,8 @@ configuration:
   - Release
 
 init:
-- ps: $Env:LABEL = "CI" + $Env:APPVEYOR_BUILD_NUMBER.PadLeft(5, "0")
-- cmd: echo Label is %LABEL%
+- ps: $env:LABEL = "CI" + $env:APPVEYOR_BUILD_NUMBER.PadLeft(5, "0")
+- cmd: echo LABEL %LABEL%
 
 before_build:
   - cmd: dotnet --version
