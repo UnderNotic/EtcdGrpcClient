@@ -32,7 +32,7 @@ configuration:
   - Release
 
 init:
-- ps: $env:LABEL = "CI" + $env:APPVEYOR_BUILD_NUMBER.PadLeft(6, "0")
+- ps: $env:LABEL = "-CI" + $env:APPVEYOR_BUILD_NUMBER.PadLeft(6, "0")
 - cmd: echo LABEL %LABEL%
 
 before_build:
