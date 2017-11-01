@@ -40,9 +40,6 @@ nuget:
 #       build configuration       #
 #---------------------------------#
 
-# build platform, i.e. x86, x64, Any CPU. This setting is optional.
-platform: Any CPU
-
 # build Configuration, i.e. Debug, Release, etc.
 configuration: Release
 
@@ -51,7 +48,7 @@ before_build:
   - dotnet restore --verbosity minimal
 
 build_script:
-  - dotnet build -c %CONFIGURATION% --no-restore --version-suffix %LABEL%
+  - dotnet build -c $(configuration) --no-restore --version-suffix %LABEL%
 
 after_build:
   - dotnet pack "EtcdGrpcClient" --no-build --version-suffix %LABEL% -o artifacts
@@ -59,7 +56,7 @@ after_build:
 before_test:
   - echo "Running Tests"
 test_script:
-  - dotnet test "EtcdGrpcClient.Test" -c %CONFIGURATION%
+  - dotnet test "EtcdGrpcClient.Test" -c $(configuration)
 
 
 #---------------------------------#
