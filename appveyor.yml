@@ -1,19 +1,5 @@
-
-# Notes:
-#   - Minimal appveyor.yml file is an empty file. All sections are optional.
-#   - Indent each level of configuration with 2 spaces. Do not use tabs!
-#   - All section names are case-sensitive.
-#   - Section names should be unique on each level.
-
-#---------------------------------#
-#      general configuration      #
-#---------------------------------#
-
 # version format
 version: 0.0.{build}
-
-# you can use {branch} name in version format too
-# version: 1.0.{build}-{branch}
 
 # branches to build
 branches:
@@ -22,38 +8,15 @@ branches:
     - master
     - production
 
-#---------------------------------#
-#    environment configuration    #
-#---------------------------------#
-
 # Build worker image (VM template)
 image: Visual Studio 2017
-
-
-# environment variables
-environment:
-  my_var1: value1
-  my_var2: value2
-  # this is how to set encrypted variable. Go to "Encrypt data" page in account menu to encrypt data.
-  my_secure_var1:
-    secure: FW3tJ3fMncxvs58/ifSP7w==
-
-
-# this is how to allow failing jobs in the matrix
-matrix:
-  fast_finish: true     # set this flag to immediately finish build once one of the jobs fails.
-  allow_failures:
-    - platform: x86
-      configuration: Debug
-    - platform: x64
-      configuration: Release
 
 
 # build cache to preserve files/folders between builds
 cache:
   - packages -> **\packages.config  # preserve "packages" directory in the root of build folder but will reset it if packages.config is modified
   - '%LocalAppData%\NuGet\v3-cache' # NuGet v3
-
+  - '%USERPROFILE%\.nuget\packages'
 
 
 # enable patching of AssemblyInfo.* files
@@ -83,24 +46,20 @@ platform: Any CPU
 # build Configuration, i.e. Debug, Release, etc.
 configuration: Release
 
+before_build:
+  - cmd: dotnet --version
+  - dotnet restore --verbosity minimal
 
-build:
-  parallel: true                  # enable MSBuild parallel builds
-  project: EtcdGrcpClient.sln      # path to Visual Studio solution or project
-  publish_nuget: true             # package projects with .nuspec files and push to artifacts
-  publish_nuget_symbols: true     # generate and publish NuGet symbol packages
-  include_nuget_references: true  # add -IncludeReferencedProjects option while packaging NuGet artifacts
+build_script:
+  - dotnet build -c %CONFIGURATION% --no-restore --version-suffix %LABEL%
 
+after_build:
+  - dotnet pack "EtcdGrpcClient" --no-build --version-suffix %LABEL% -o artifacts
 
-
-#---------------------------------#
-#       tests configuration       #
-#---------------------------------#
-
-# scripts to run before tests
 before_test:
   - echo "Running Tests"
- 
+ test_script:
+  - dotnet test "EtcdGrpcClient.Test" -c %CONFIGURATION%
 
 
 #---------------------------------#
@@ -108,8 +67,7 @@ before_test:
 #---------------------------------#
 
 artifacts:
-  # pushing all *.nupkg files in build directory recursively
-  - path: '**\*.nupkg'
+  - path: artifacts\**\*.*
 
 deploy:
     # Deploying to NuGet feed
