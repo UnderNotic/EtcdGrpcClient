@@ -23,7 +23,7 @@ cache:
 assembly_info:
   patch: true
   file: AssemblyInfo.*
-  assembly_version: "2.2.{build}"
+  assembly_version: "{version}"
   assembly_file_version: "{version}"
   assembly_informational_version: "{version}"
 
@@ -48,7 +48,7 @@ before_build:
   - dotnet restore --verbosity minimal
 
 build_script:
-  - dotnet build -c $(configuration) --no-restore --version-suffix %LABEL%
+  - dotnet build -c {configuration} --no-restore --version-suffix {version}
 
 after_build:
   - dotnet pack "EtcdGrpcClient" --no-build --version-suffix %LABEL% -o artifacts
