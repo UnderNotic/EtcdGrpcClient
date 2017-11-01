@@ -1,4 +1,4 @@
-$Env:BUILD = :$Env:APPVEYOR_BUILD_NUMBER.PadLeft(6, "0")
+$env:BUILD = $env:APPVEYOR_BUILD_NUMBER.PadLeft(6, "0")
 
 # version format
 version: 0.0.%BUILD%
