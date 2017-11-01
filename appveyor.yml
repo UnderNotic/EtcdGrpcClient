@@ -21,7 +21,7 @@ cache:
 
 dotnet_csproj:
   patch: true
-  file: '**\*.csproj'
+  file: '**\*.csproj;**\*.props;**\*.fsproj;**\*.xml'
   version: '{version}'
   package_version: '{version}'
   assembly_version: '{version}'
@@ -46,11 +46,11 @@ configuration:
   - Release
 
 init:
-- ps: $Env:LABEL = $Env:APPVEYOR_BUILD_NUMBER
+- ps: $Env:LABEL = $Env:APPVEYOR_BUILD_NUMBER.PadLeft(6, "0")
 
 before_build:
   - cmd: dotnet --version
-  - cmd: echo Nuget version %LABEL% 
+  - cmd: echo Nuget version %LABEL%
   - dotnet restore --verbosity minimal
 
 build_script:
