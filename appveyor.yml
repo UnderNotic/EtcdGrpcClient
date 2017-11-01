@@ -43,12 +43,12 @@ build_script:
   - dotnet build -c %CONFIGURATION% --no-restore --version-suffix %LABEL%
 
 after_build:
-  - dotnet pack "EtcdGrpcClient" --no-build --version-suffix %LABEL%
+  - dotnet pack "EtcdGrpcClient" --no-build --version-suffix %LABEL% -o artifacts
 
 before_test:
   - echo "Running Tests"
 test_script:
-  - dotnet test "EtcdGrpcClient.Test" -c $(configuration)
+  - dotnet test "EtcdGrpcClient.Test" -c %CONFIGURATION%
 
 
 #---------------------------------#
