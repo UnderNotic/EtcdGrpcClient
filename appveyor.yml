@@ -43,17 +43,15 @@ nuget:
 #---------------------------------#
 
 # build Configuration, i.e. Debug, Release, etc.
-configuration: Release
-
-init:
-- ps: $Env:LABEL = "CI" + $Env:APPVEYOR_BUILD_NUMBER.PadLeft(5, "0")
+configuration: 
+  - Release
 
 before_build:
   - cmd: dotnet --version
   - dotnet restore --verbosity minimal
 
 build_script:
-  - dotnet build -c %VERSION% --no-restore --version-suffix %version%
+  - dotnet build -c %CONFIGURATION% --no-restore --version-suffix %version%
 
 after_build:
   - dotnet pack "EtcdGrpcClient" --no-build --version-suffix %LABEL% -o artifacts
