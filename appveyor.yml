@@ -1,5 +1,7 @@
+$Env:BUILD = :$Env:APPVEYOR_BUILD_NUMBER.PadLeft(6, "0")
+
 # version format
-version: 0.0.{build}
+version: 0.0.%BUILD%
 
 # branches to build
 branches:
@@ -50,14 +52,14 @@ init:
 
 before_build:
   - cmd: dotnet --version
-  - cmd: echo Nuget version %LABEL%
+  - cmd: echo Nuget version %BUILD%
   - dotnet restore --verbosity minimal
 
 build_script:
-  - dotnet build -c %CONFIGURATION% --no-restore --version-suffix %LABEL%
+  - dotnet build -c %CONFIGURATION% --no-restore
 
 after_build:
-  - dotnet pack "EtcdGrpcClient" --no-build --version-suffix %LABEL% -o artifacts
+  - dotnet pack "EtcdGrpcClient" --no-build
 
 before_test:
   - echo "Running Tests"
