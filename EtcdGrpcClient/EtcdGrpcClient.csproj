@@ -1,6 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>EtcdGrcpClient</AssemblyName>
+    <PackageId>MyProjectName</PackageId>
+    <Title>Simple yet useful .net etcd v3 grpc client</Title>
+    <Authors>undernotic</Authors>
     <Version>0.0.1$(VersionSuffix)</Version>
   </PropertyGroup>
   <ItemGroup>
