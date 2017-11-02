@@ -17,13 +17,40 @@ Assert.Equal("value", res);
 
 ### Api
 - Get
-
+``` csharp
+    await etcdClient.Put("key", "value");
+    var res = await etcdClient.Get("test3");
+    Assert.AreEqual("value", res); 
+```
 - GetRange
+``` csharp
+    //Range with one parameter(prefix) will return all keys with given prefix
+    Enumerable.Range(0, 3).Select(async x => await etcdClient.Put("key" + x, "value" + x));
+    var res = await etcdClient.GetRange("key");
+    Assert.AreEqual(3, res.Count);
 
-- Put
-
+    //Range with two parameters will return all keys in given range INCLUDING
+    Enumerable.Range(0, 3).Select(async x => await etcdClient.Put("key" + x, "value" + x));
+    var res = await etcdClient.GetRange("key0, key1");
+    Assert.AreEqual(2, res.Count);
+```
 - Watch
+``` csharp
+    //Watch with one parameter(prefix) will watch all keys with given prefix
+    var resultList = new List<EtcdWatchEvent[]>();
+    var watcher = await etcdClient.WatchRange("key");
+    watcher.Subscribe(e => resultList.Add(e));
 
+    Enumerable.Range(0, 3).Select(async x => await etcdClient.Put("key" + x, "value" + x));
+    Assert.AreEqual(3, resultList.Count);
+
+    //Watch with two parameters will watch all keys in given range INCLUDING
+    var resultList = new List<EtcdWatchEvent[]>();
+    Enumerable.Range(0, 3).Select(async x => await etcdClient.Put("key" + x, "value" + x));
+    var watcher = await etcdClient.WatchRange("test0, test1");
+    watcher.Subscribe(e => resultList.Add(e));
+    Assert.AreEqual(2, res.Count);
+```
 - WatchRange
 
 - Delete

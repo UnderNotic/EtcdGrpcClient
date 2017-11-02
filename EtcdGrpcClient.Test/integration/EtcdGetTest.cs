@@ -55,7 +55,6 @@ namespace EtcdGrpcClient.Test
 
             var res1 = await etcdClient.GetRange("test0", "test4");
             var res2 = await etcdClient.GetRange("testB", "testD");
-            var xx = Enumerable.Range(66, 3).Select(x => "value2" + x).ToArray();
 
             Assert.AreEqual(5, res1.Count);
             CollectionAssert.AreEquivalent(Enumerable.Range(0, 5).Select(x => "value1" + x).ToArray(), res1.Values.ToArray());
