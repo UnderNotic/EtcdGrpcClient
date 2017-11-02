@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>EtcdGrcpClient</AssemblyName>
-    <PackageId>MyProjectName</PackageId>
+    <PackageId>EtcdGrcpClient</PackageId>
     <Title>Simple yet useful .net etcd v3 grpc client</Title>
     <Authors>undernotic</Authors>
     <Version>0.0.1$(VersionSuffix)</Version>
