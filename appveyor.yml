@@ -66,7 +66,7 @@ deploy:
       secure: 5OrUpbFQ7PxJY1HOxTZle3CiV7slT+WicPPn9/DojIZlKW3Ck48cwwvAA0yYqw6b
     skip_symbols: false
     symbol_server:
-    artifact: .\**\artifacts\**\*.*
+    artifact: EtcdGrpcClient\artifacts\EtcdGrpcClient.0.0.1-CI000041.nupkg
 
     # Deploy to GitHub Releases
   - provider: GitHub
