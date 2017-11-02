@@ -63,10 +63,10 @@ deploy:
   - provider: NuGet
     server: https://my.nuget.server/feed
     api_key:
-      secure: FYWX6NfjZIVw==
+      secure: 5OrUpbFQ7PxJY1HOxTZle3CiV7slT+WicPPn9/DojIZlKW3Ck48cwwvAA0yYqw6b
     skip_symbols: false
-    symbol_server: https://your.symbol.server/feed
-    artifact: MyPackage.nupkg
+    symbol_server:
+    artifact: .\**\artifacts\**\*.*
 
     # Deploy to GitHub Releases
   - provider: GitHub
