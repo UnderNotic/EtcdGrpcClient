@@ -36,6 +36,17 @@ Assert.Equal("value", res);
 ```
 - Watch
 ``` csharp
+    var resultList = new List<EtcdWatchEvent[]>();
+    var watcher = await etcdClient.Watch("key");
+    watcher.Subscribe(e => resultList.Add(e));
+    await etcdClient.Put("key", "value");
+
+    Assert.AreEqual("key", resultList[0][0].Key);
+    Assert.AreEqual("value", resultList[0][0].Value);
+    Assert.AreEqual(EvenType.Put, resultList[0][0].Type);
+```
+- WatchRange
+``` csharp
     //Watch with one parameter(prefix) will watch all keys with given prefix
     var resultList = new List<EtcdWatchEvent[]>();
     var watcher = await etcdClient.WatchRange("key");
@@ -51,8 +62,6 @@ Assert.Equal("value", res);
     watcher.Subscribe(e => resultList.Add(e));
     Assert.AreEqual(2, res.Count);
 ```
-- WatchRange
-
 - Delete
 
 - DeleteRange
