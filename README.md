@@ -16,6 +16,21 @@ Assert.Equal("value", res);
 ```
 
 ### Api
+- Get
+
+- GetRange
+
+- Put
+
+- Watch
+
+- WatchRange
+
+- Delete
+
+- DeleteRange
+
+- Lease
 
 ## Authors
 
