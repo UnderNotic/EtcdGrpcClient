@@ -63,11 +63,52 @@ Assert.Equal("value", res);
     watcher.Subscribe(e => resultList.Add(e));
     Assert.AreEqual(2, res.Count);
 ```
-- Delete
-
 - DeleteRange
+``` csharp
+    //Delete with one parameter(prefix) will delete all key with given prefix
+    await etcdClient.Put("test1", string.Empty);
+    await etcdClient.Put("test2", string.Empty);
+
+    var deletedCount = etcdClient.DeleteRange("test");
+    var getResult = await etcdClient.GetRange("test");
+
+    Assert.AreEqual(3, deletedCount);
+    Assert.AreEqual(0, get.Values.Count);
+
+       //Delete with two parameters will delete keys in given range INCLUDING
+    await etcdClient.Put("test1", string.Empty);
+    await etcdClient.Put("test2", string.Empty);
+    await etcdClient.Put("test3", string.Empty);
+
+    var deletedCount = etcdClient.DeleteRange("test1", "test2");
+    var getResult = await etcdClient.GetRange("test");
+
+    Assert.AreEqual(2, deletedCount);
+    Assert.AreEqual(1, get.Values.Count);
+```
 
 - Lease
+``` csharp
+    //Put with lease third parameter is TTL(time to live) in seconds
+    var leaseId = await etcdClient.PutWithLease("test", "value", 1);
+    var get = await etcdClient.Get("test");
+    await Task.Delay(1100);
+
+    Assert.ThrowsAsync<Exception>(async () => await etcdClient.Get("test"));
+    Assert.AreEqual("value", get);
+
+
+    //Keep alive lease to refresh TTL
+     var leaseId = await etcdClient.PutWithLease("test", "value", 1);
+    await Task.Delay(1100);
+    await etcdClient.KeepAliveLease(leaseId);
+    await Task.Delay(1100);
+    await etcdClient.KeepAliveLease(leaseId);
+    await Task.Delay(1100);
+    var res = await etcdClient.Get("test");
+
+    Assert.AreEqual("value", res);
+```
 
 ## Authors
 
