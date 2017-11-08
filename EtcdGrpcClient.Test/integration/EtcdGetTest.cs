@@ -26,7 +26,7 @@ namespace EtcdGrpcClient.Test
         }
 
         [Test]
-        public void ShouldThrownWhenKeyDoesntExist()
+        public void ShouldThrownWhenKeyDoesNotExist()
         {
             Assert.ThrowsAsync<Exception>(async () => await etcdClient.Get("test"));
         }

@@ -16,7 +16,7 @@ namespace EtcdGrpcClient.Test
             await etcdClient.Put("test1", string.Empty);
             await etcdClient.Put("test2", string.Empty);
             await etcdClient.Put("test3", string.Empty);
-
+         
             var deletedCount = await EtcdTestHelper.DeleteAllRecords();
             var get = await etcdClient.GetRange("test");
 
