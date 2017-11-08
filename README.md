@@ -1,4 +1,4 @@
-# EtcdGrpcClient ![appveyor status](https://ci.appveyor.com/api/projects/status/github/undernotic/etcdgrpcclient) [![NuGet](https://img.shields.io/nuget/vpre/EtcdGrcpClient.svg?style=plastic)](https://www.nuget.org/packages/EtcdGrcpClient)
+# EtcdGrpcClient [![appveyor status](https://ci.appveyor.com/api/projects/status/github/undernotic/etcdgrpcclient)](https://ci.appveyor.com/project/UnderNotic/etcdgrpcclient) [![NuGet](https://img.shields.io/nuget/vpre/EtcdGrcpClient.svg?style=plastic)](https://www.nuget.org/packages/EtcdGrcpClient)
 
 Simple yet useful .net etcd v3 grpc client
 
