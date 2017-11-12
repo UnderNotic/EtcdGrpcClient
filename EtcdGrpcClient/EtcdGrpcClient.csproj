@@ -5,7 +5,7 @@
     <PackageId>EtcdGrcpClient</PackageId>
     <Title>Simple yet useful .net etcd v3 grpc client</Title>
     <Authors>undernotic</Authors>
-    <Version>0.0.1</Version>
+    <Version>0.0.1$(VersionSuffix)</Version>
     <PackageLicenseUrl>https://opensource.org/licenses/mit-license.php</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/UnderNotic/EtcdGrpcClient</PackageProjectUrl>
     <PackageTags>Etcd;grpc;service discovery</PackageTags>
