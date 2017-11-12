@@ -66,6 +66,8 @@ deploy:
     skip_symbols: false
     symbol_server:
     artifact: /.*\.nupkg/
+    on:
+      appveyor_repo_tag: true
 
     # Deploy to GitHub Releases
   - provider: GitHub
