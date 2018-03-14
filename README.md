@@ -1,4 +1,4 @@
-# <img height="200" alt="etcd grpc client" src="https://raw.githubusercontent.com/undernotic/etcdgrpcclient/master/img/logo.png">
+# <img height="90" alt="etcd grpc client" src="https://raw.githubusercontent.com/undernotic/etcdgrpcclient/master/img/logo.png">
 [![appveyor status](https://ci.appveyor.com/api/projects/status/github/undernotic/etcdgrpcclient)](https://ci.appveyor.com/project/UnderNotic/etcdgrpcclient) [![NuGet](https://img.shields.io/nuget/vpre/EtcdGrcpClient.svg?style=plastic)](https://www.nuget.org/packages/EtcdGrcpClient)
 
 Simple yet useful .net etcd v3 grpc client
