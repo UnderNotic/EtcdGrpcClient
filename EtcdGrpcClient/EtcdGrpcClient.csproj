@@ -8,7 +8,7 @@
     <PackageProjectUrl>https://raw.githubusercontent.com/undernotic/etcdgrpcclient/master/img/logo.png</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/undernotic/etcdgrpcclient/master/img/logo-icon.png</PackageIconUrl>
     <Authors>undernotic</Authors>
-    <Version>0.0.2$(VersionSuffix)</Version>
+    <Version>0.0.3$(VersionSuffix)</Version>
     <PackageLicenseUrl>https://opensource.org/licenses/mit-license.php</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/UnderNotic/EtcdGrpcClient</PackageProjectUrl>
     <PackageTags>EtcdGrpcClient;Etcd;grpc;service discovery;discovery</PackageTags>
