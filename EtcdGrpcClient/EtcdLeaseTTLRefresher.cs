@@ -3,7 +3,7 @@ using Grpc.Core;
 using System;
 using System.Threading.Tasks;
 
-namespace EtcdGrcpClient
+namespace EtcdGrpcClient
 {
     public class EtcdLeaseTTLRefresher : IDisposable
     {

@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>EtcdGrcpClient</AssemblyName>
-    <PackageId>EtcdGrcpClient</PackageId>
-    <Title>EtcdGrcpClient</Title>
+    <AssemblyName>EtcdGrpcClient</AssemblyName>
+    <PackageId>EtcdGrpcClient</PackageId>
+    <Title>EtcdGrpcClient</Title>
     <Description>Simple yet useful .net etcd v3 grpc client</Description>
     <PackageProjectUrl>https://raw.githubusercontent.com/undernotic/etcdgrpcclient/master/img/logo.png</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/undernotic/etcdgrpcclient/master/img/logo-icon.png</PackageIconUrl>

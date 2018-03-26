@@ -1,4 +1,4 @@
-﻿using EtcdGrcpClient;
+﻿using EtcdGrpcClient;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;

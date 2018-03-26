@@ -1,4 +1,4 @@
-﻿using EtcdGrcpClient;
+﻿using EtcdGrpcClient;
 using System;
 using Microsoft.Extensions.Configuration;
 

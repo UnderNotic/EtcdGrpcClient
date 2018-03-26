@@ -7,7 +7,7 @@ using Etcdserverpb;
 using static Etcdserverpb.Lease;
 using static Etcdserverpb.Watch;
 
-namespace EtcdGrcpClient
+namespace EtcdGrpcClient
 {
     public class EtcdClient : IDisposable
     {
