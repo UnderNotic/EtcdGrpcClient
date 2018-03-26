@@ -3,9 +3,12 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>EtcdGrcpClient</AssemblyName>
     <PackageId>EtcdGrcpClient</PackageId>
-    <Title>Simple yet useful .net etcd v3 grpc client</Title>
+    <Title>EtcdGrcpClient</Title>
+    <Description>Simple yet useful .net etcd v3 grpc client</Description>
+    <PackageProjectUrl>https://raw.githubusercontent.com/undernotic/etcdgrpcclient/master/img/logo.png</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/undernotic/etcdgrpcclient/master/img/logo-icon.png</PackageIconUrl>
     <Authors>undernotic</Authors>
-    <Version>0.0.1$(VersionSuffix)</Version>
+    <Version>0.0.2$(VersionSuffix)</Version>
     <PackageLicenseUrl>https://opensource.org/licenses/mit-license.php</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/UnderNotic/EtcdGrpcClient</PackageProjectUrl>
     <PackageTags>Etcd;grpc;service discovery</PackageTags>
